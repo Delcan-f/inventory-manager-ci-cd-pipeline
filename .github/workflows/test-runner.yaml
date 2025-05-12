@@ -1,0 +1,39 @@
+name: MERN Continuous Deployment
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch: 
+  
+jobs:
+  frontend-tests:
+    name: Run Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Frontend code
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: Delcan-f/Inventory-Manager-Frontend
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run tests
+        run: npm run test
+  
+  backend-tests:
+      name: Run Backend Tests
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout Backend code
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: Delcan-f/Inventory-Manager-Backend
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run tests
+        run: npm run test
